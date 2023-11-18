@@ -1,4 +1,4 @@
-import ArticleList, { Article } from '@/components/ArticleList/ArticleList';
+import ArticleList, { Article } from '@/components/article/list/ArticleList';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -16,11 +16,14 @@ export default function Home() {
     select: (data) => {
       // TODO: 데이터 타입 정의 해보기
       return data.map((d: any) => {
+        const person = d.byline.person[0];
+        const name = person ? `${person.firstname} ${person.lastname}` : '';
+
         return {
           id: d._id,
           headline: d.headline.main,
           organization: d.source,
-          reporter: d.byline.original,
+          reporter: name,
           web_url: d.web_url,
           pub_date: d.pub_date,
         };
@@ -28,7 +31,7 @@ export default function Home() {
     },
   });
 
-  console.log(data);
+  console.log(isPending, isError);
 
   if (isPending) {
     return <>로딩중...</>;
@@ -38,19 +41,23 @@ export default function Home() {
     return <>에러 발생</>;
   }
 
+  console.log(data);
+
   return (
-    <div>
+    <Container>
       <ArticleList articles={data} />
-    </div>
+    </Container>
   );
 }
 
 const Container = styled.div`
   width: 100vw;
-  height: 100%;
+  height: calc(100vh - 145px);
+  margin-top: 60px;
 
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  align-items: center;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;

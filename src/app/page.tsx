@@ -30,7 +30,6 @@ export default function Main() {
 const Container = styled.main`
   width: 100vw;
   height: 100vh;
-  padding: 60px 0 85px 0;
 
   display: flex;
   flex-direction: column;
