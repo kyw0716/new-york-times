@@ -11,6 +11,18 @@ export default function Home() {
 
       return response.data;
     },
+    select: (data) => {
+      // TODO: 데이터 타입 정의 해보기
+      return data.response.docs.map((d: any) => {
+        return {
+          headline: d.headline.main,
+          organization: d.source,
+          reporter: d.byline.original,
+          web_url: d.web_url,
+          pub_date: d.pub_date,
+        };
+      });
+    },
   });
 
   console.log(data);
