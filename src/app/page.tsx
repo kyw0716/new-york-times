@@ -19,7 +19,7 @@ export default function Main() {
         {page === 'home' && <Home />}
         {page === 'scrap' && <Scrap />}
       </main>
-      <Footer setPage={setPage} />
+      <Footer page={page} setPage={setPage} />
     </QueryClientProvider>
   );
 }
