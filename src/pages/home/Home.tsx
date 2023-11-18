@@ -1,6 +1,7 @@
 import ArticleList, { Article } from '@/components/ArticleList/ArticleList';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import styled from 'styled-components';
 
 export default function Home() {
   const { data, isPending, isError } = useQuery<Article[]>({
@@ -43,3 +44,13 @@ export default function Home() {
     </div>
   );
 }
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+`;
