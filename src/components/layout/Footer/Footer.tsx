@@ -17,7 +17,7 @@ export default function Footer({ page, setPage }: Props) {
           src={`/homeIcon-${isHomePage ? 'light' : 'dark'}.svg`}
           width={20}
           height={22}
-        />{' '}
+        />
         홈
       </PageNavigatorButton>
       <PageNavigatorButton onClick={() => setPage('scrap')} color={isHomePage ? '#6D6D6D' : '#fff'}>
