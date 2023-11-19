@@ -1,6 +1,16 @@
-import styled from 'styled-components';
 import { Article } from '../list/ArticleList';
 import Image from 'next/image';
+import {
+  Head,
+  Bottom,
+  Container,
+  EllipsisSpan,
+  HeadLine,
+  ReporterAndOrganization,
+  UnStyledButton,
+} from './ArticleCard.style';
+import { useRouter } from 'next/navigation';
+import { useDate } from '@/hooks/useDate';
 
 interface Props {
   article: Article;
@@ -8,14 +18,12 @@ interface Props {
 }
 
 function ArticleCard({ article, isSubscribed }: Props) {
+  const router = useRouter();
   const { headline, organization, reporter, web_url, pub_date } = article;
-  const date = new Date(pub_date);
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const { year, month, day } = useDate(pub_date);
 
   return (
-    <Container>
+    <Container onClick={() => router.push(web_url)}>
       <Head>
         <HeadLine>{headline}</HeadLine>
         <UnStyledButton>
@@ -38,55 +46,5 @@ function ArticleCard({ article, isSubscribed }: Props) {
     </Container>
   );
 }
-
-const Container = styled.div`
-  height: 84px;
-  padding: 10px 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-shrink: 0;
-
-  background-color: #fff;
-  border-radius: 8px;
-`;
-
-const HeadLine = styled.h1`
-  font-size: 16px;
-  font-weight: 700;
-`;
-
-const Head = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-`;
-
-const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  font-size: 10px;
-`;
-
-const ReporterAndOrganization = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const EllipsisSpan = styled.span`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const UnStyledButton = styled.button`
-  width: fit-content;
-  height: fit-content;
-  background-color: inherit;
-  border: none;
-  cursor: pointer;
-`;
 
 export default ArticleCard;
