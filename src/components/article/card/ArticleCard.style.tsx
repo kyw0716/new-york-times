@@ -21,7 +21,7 @@ export const Container = styled.div`
 `;
 
 export const HeadLine = styled.h1`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
 `;
 
@@ -47,6 +47,8 @@ export const EllipsisSpan = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  color: #6d6d6d;
 `;
 
 export const UnStyledButton = styled.button`

@@ -1,4 +1,5 @@
-import ArticleList, { Article } from '@/components/article/list/ArticleList';
+import ArticleList from '@/components/article/List';
+import { Article } from '@/components/article/List/ArticleList';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import styled from 'styled-components';

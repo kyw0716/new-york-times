@@ -1,4 +1,4 @@
-import ArticleCard from '../card/ArticleCard';
+import ArticleCard from '../Card';
 import { Container } from './ArticleList.style';
 
 export interface Article {

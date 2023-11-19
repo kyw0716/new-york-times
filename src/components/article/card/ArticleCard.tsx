@@ -1,4 +1,4 @@
-import { Article } from '../list/ArticleList';
+import { Article } from '../List/ArticleList';
 import Image from 'next/image';
 import {
   Head,
