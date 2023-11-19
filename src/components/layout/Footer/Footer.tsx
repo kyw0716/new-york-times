@@ -2,16 +2,19 @@ import Image from 'next/image';
 import { Container, PageNavigatorButton } from './Footer.style';
 
 interface Props {
-  page: 'home' | 'scrap';
-  setPage: (page: 'home' | 'scrap') => void;
+  articleType: 'default' | 'scrap';
+  setArticleType: (page: 'default' | 'scrap') => void;
 }
 
-export default function Footer({ page, setPage }: Props) {
-  const isHomePage = page === 'home';
+export default function Footer({ articleType: page, setArticleType: setPage }: Props) {
+  const isHomePage = page === 'default';
 
   return (
     <Container>
-      <PageNavigatorButton onClick={() => setPage('home')} color={isHomePage ? '#fff' : '#6D6D6D'}>
+      <PageNavigatorButton
+        onClick={() => setPage('default')}
+        color={isHomePage ? '#fff' : '#6D6D6D'}
+      >
         <Image
           alt="홈 페이지 아이콘"
           src={`/homeIcon-${isHomePage ? 'light' : 'dark'}.svg`}

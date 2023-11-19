@@ -1,10 +1,14 @@
 import ArticleList from '@/components/article/List';
 import { Article } from '@/components/article/List/ArticleList';
+import Footer from '@/components/layout/Footer';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function Home() {
+function ArticleFetcher() {
+  const [articleType, setArticleType] = useState<'default' | 'scrap'>('default');
+
   const { data, isPending, isError } = useQuery<Article[]>({
     queryKey: ['search-articles'],
     queryFn: async () => {
@@ -32,22 +36,21 @@ export default function Home() {
     },
   });
 
-  console.log(isPending, isError);
-
   if (isPending) {
     return <>로딩중...</>;
   }
 
-  if (isError) {
+  if (isError || data === undefined) {
     return <>에러 발생</>;
   }
 
-  console.log(data);
-
   return (
-    <Container>
-      <ArticleList articles={data} />
-    </Container>
+    <>
+      <Container>
+        <ArticleList articles={articleType === 'default' ? data : []} />
+      </Container>
+      <Footer articleType={articleType} setArticleType={setArticleType} />
+    </>
   );
 }
 
@@ -59,3 +62,5 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export default ArticleFetcher;

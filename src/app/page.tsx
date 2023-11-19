@@ -1,28 +1,21 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Home from '../pages/home/Home';
-import { useState } from 'react';
-import Scrap from '../pages/scrap/Scrap';
+import ArticleFetcher from '../components/article/Fetcher/ArticleFetcher';
 import GlobalStyles from '../styles/GlobalStyles';
-import Footer from '../components/layout/Footer';
 import Header from '@/components/layout/Header';
 import styled from 'styled-components';
 
 const queryClient = new QueryClient();
 
 export default function Main() {
-  const [page, setPage] = useState<'home' | 'scrap'>('home');
-
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyles />
       <Header />
       <Container>
-        {page === 'home' && <Home />}
-        {page === 'scrap' && <Scrap />}
+        <ArticleFetcher />
       </Container>
-      <Footer page={page} setPage={setPage} />
     </QueryClientProvider>
   );
 }
