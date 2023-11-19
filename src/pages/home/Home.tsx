@@ -57,7 +57,4 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  overflow-y: scroll;
-  overflow-x: hidden;
 `;
