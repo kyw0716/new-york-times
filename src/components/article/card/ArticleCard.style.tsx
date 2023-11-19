@@ -11,6 +11,13 @@ export const Container = styled.div`
 
   background-color: #fff;
   border-radius: 8px;
+
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 `;
 
 export const HeadLine = styled.h1`
