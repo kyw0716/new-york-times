@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Container } from './Header.style';
 import FilterButton from './components/FilterButton';
 import { useModal } from '@/hooks/useModal';
-import FilterModal from '@/components/modal/filterModal';
+import FilterModal from '@/components/modal/filter';
 
 function Header() {
   const { openModal } = useModal();
