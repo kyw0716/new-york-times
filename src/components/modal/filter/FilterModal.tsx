@@ -8,19 +8,8 @@ import {
   Label,
   SubmitButton,
 } from './FilterModal.style';
-
-const COUNTRIES = {
-  대한민국: 'SOUTH KOREA',
-  중국: 'CHINA',
-  일본: 'JAPAN',
-  미국: 'USA',
-  북한: 'NORTH KOREA',
-  러시아: 'RUSSIA',
-  프랑스: 'FRANCE',
-  영국: 'ENGLAND',
-};
-
-type Country = keyof typeof COUNTRIES;
+import { COUNTRIES } from './contstans';
+import { Country } from './types';
 
 function FilterModal() {
   const [headline, setHeadline] = useState('');
@@ -31,6 +20,15 @@ function FilterModal() {
     e.preventDefault();
 
     console.log(headline, date, countries);
+  };
+
+  const handleToggleCountry = (country: Country) => {
+    if (countries.includes(COUNTRIES[country])) {
+      setCountries((prev) => prev.filter((c) => c !== COUNTRIES[country]));
+      return;
+    }
+
+    setCountries((prev) => [...prev, COUNTRIES[country]]);
   };
 
   return (
@@ -54,13 +52,7 @@ function FilterModal() {
             <CountryButton
               type="button"
               key={country}
-              onClick={() => {
-                if (countries.includes(COUNTRIES[country])) {
-                  setCountries((prev) => prev.filter((c) => c !== COUNTRIES[country]));
-                } else {
-                  setCountries((prev) => [...prev, COUNTRIES[country]]);
-                }
-              }}
+              onClick={() => handleToggleCountry(country)}
               color={countries.includes(COUNTRIES[country]) ? '#82B0F4' : '#fff'}
             >
               {country}
