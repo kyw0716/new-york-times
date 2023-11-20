@@ -4,11 +4,12 @@ import styled from 'styled-components';
 interface Props {
   icon?: ReactNode;
   content: string;
+  onClick: () => void;
 }
 
-function FilterButton({ icon, content }: Props) {
+function FilterButton({ icon, content, onClick }: Props) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       {icon}
       {content}
     </Container>
