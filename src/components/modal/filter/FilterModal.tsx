@@ -12,8 +12,11 @@ import { COUNTRIES } from './contstans';
 import { Country } from './types';
 import { useFilter } from '@/hooks/useFilter';
 import { useModal } from '@/hooks/useModal';
+import { useQueryClient } from '@tanstack/react-query';
+import { QUERY_KEY_ARTICLE_SEARCH } from '@/constants/query';
 
 function FilterModal() {
+  const queryClient = useQueryClient();
   const { closeModal } = useModal();
   const {
     headline: initialHeadline,
@@ -36,9 +39,10 @@ function FilterModal() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    setFilters({ headline, date, countries });
+    setFilters({ headline, date, countries: countries as Country[] });
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEY_ARTICLE_SEARCH] });
+
     closeModal();
-    console.log(headline, date, countries);
   };
 
   const handleToggleCountry = (country: Country) => {
