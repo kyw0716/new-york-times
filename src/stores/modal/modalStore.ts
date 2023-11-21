@@ -1,21 +1,21 @@
 import { ReactNode } from 'react';
 
 let modalStore: ReactNode | null = null;
-const listeners: (() => void)[] = [];
-
-export const subscribeModalStore = (listener: () => void) => {
-  listeners.push(listener);
-
-  return () => listeners.filter((l) => l !== listener);
-};
+let listeners: (() => void)[] = [];
 
 export const getModalStoreSnapshot = () => modalStore;
+
+export const setModalStore = (store: ReactNode) => {
+  modalStore = store;
+  emitChanges();
+};
 
 const emitChanges = () => {
   listeners.forEach((l) => l());
 };
 
-export const setModalStore = (store: ReactNode) => {
-  modalStore = store;
-  emitChanges();
+export const subscribeModalStore = (listener: () => void) => {
+  listeners.push(listener);
+
+  return () => (listeners = listeners.filter((l) => l !== listener));
 };
