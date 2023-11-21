@@ -17,13 +17,15 @@ function FilterButton({ icon, content, onClick }: Props) {
 }
 
 const Container = styled.button`
-  width: fit-content;
+  max-width: 200px;
   height: 34px;
   padding: 10px 12px;
 
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
 
   border: 1px solid #c4c4c4;
   border-radius: 30px;
@@ -33,6 +35,10 @@ const Container = styled.button`
   color: #6d6d6d;
 
   background-color: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
 
   cursor: pointer;
 `;

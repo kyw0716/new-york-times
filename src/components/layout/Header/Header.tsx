@@ -3,8 +3,11 @@ import { Container } from './Header.style';
 import FilterButton from './components/FilterButton';
 import { useModal } from '@/hooks/useModal';
 import FilterModal from '@/components/modal/filter';
+import { useFilter } from '@/hooks/useFilter';
 
 function Header() {
+  const { headline, date, countries } = useFilter();
+
   const { openModal } = useModal();
 
   const openFilterModal = () => {
@@ -15,15 +18,15 @@ function Header() {
     <Container>
       <FilterButton
         icon={<Image alt="돋보기 아이콘" src={'/search.svg'} width={15} height={15} />}
-        content="전체 헤드라인"
+        content={headline}
         onClick={openFilterModal}
       />
       <FilterButton
         icon={<Image alt="달력 아이콘" src={'/calendar.svg'} width={15} height={15} />}
-        content="전체 날짜"
+        content={date}
         onClick={openFilterModal}
       />
-      <FilterButton content="전체 국가" onClick={openFilterModal} />
+      <FilterButton content={countries} onClick={openFilterModal} />
     </Container>
   );
 }

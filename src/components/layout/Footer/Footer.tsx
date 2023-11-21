@@ -3,16 +3,16 @@ import { Container, PageNavigatorButton } from './Footer.style';
 
 interface Props {
   articleType: 'default' | 'scrap';
-  setArticleType: (page: 'default' | 'scrap') => void;
+  setArticleType: (articleType: 'default' | 'scrap') => void;
 }
 
-export default function Footer({ articleType: page, setArticleType: setPage }: Props) {
-  const isHomePage = page === 'default';
+export default function Footer({ articleType, setArticleType }: Props) {
+  const isHomePage = articleType === 'default';
 
   return (
     <Container>
       <PageNavigatorButton
-        onClick={() => setPage('default')}
+        onClick={() => setArticleType('default')}
         color={isHomePage ? '#fff' : '#6D6D6D'}
       >
         <Image
@@ -23,7 +23,10 @@ export default function Footer({ articleType: page, setArticleType: setPage }: P
         />
         홈
       </PageNavigatorButton>
-      <PageNavigatorButton onClick={() => setPage('scrap')} color={isHomePage ? '#6D6D6D' : '#fff'}>
+      <PageNavigatorButton
+        onClick={() => setArticleType('scrap')}
+        color={isHomePage ? '#6D6D6D' : '#fff'}
+      >
         <Image
           alt="스크랩 페이지 아이콘"
           src={`/scrapIcon-${isHomePage ? 'dark' : 'light'}.svg`}

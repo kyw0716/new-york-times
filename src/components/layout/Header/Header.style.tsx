@@ -14,4 +14,6 @@ export const Container = styled.div`
 
   border-bottom: 1px solid #c4c4c4;
   background-color: white;
+  overflow-x: auto;
+  overflow-y: hidden;
 `;
