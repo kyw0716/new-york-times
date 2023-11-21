@@ -27,11 +27,13 @@ function ArticleCard({ article, isSubscribed }: Props) {
       <Head>
         <HeadLine>{headline}</HeadLine>
         <UnStyledButton>
-          {isSubscribed ? (
-            <Image alt="노란색이 채워진 별 아이콘" src={'/star-fill.svg'} width={18} height={18} />
-          ) : (
-            <Image alt="빈 별 아이콘" src={'/star-empty.svg'} width={18} height={18} />
-          )}
+          <Image
+            alt={isSubscribed ? '노란색이 채워진 별 아이콘' : '빈 별 아이콘'}
+            src={isSubscribed ? '/star-fill.svg' : '/star-empty.svg'}
+            width={18}
+            height={18}
+            priority={true}
+          />
         </UnStyledButton>
       </Head>
       <Bottom>
