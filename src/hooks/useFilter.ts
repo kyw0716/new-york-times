@@ -9,6 +9,7 @@ import { useScrapFilter } from './useScrapFilter';
 
 export const useFilter = () => {
   const { articleType } = useArticleType();
+
   const {
     headline: homeHeadline,
     date: homeDate,

@@ -23,8 +23,12 @@ function FilterModal() {
     setFilters,
   } = useFilter();
 
-  const [headline, setHeadline] = useState(initialHeadline === '전체 국가' ? '' : initialHeadline);
-  const [date, setDate] = useState(initialDate === '전체 날짜' ? '' : initialDate);
+  const [headline, setHeadline] = useState(
+    initialHeadline === '전체 헤드라인' ? '' : initialHeadline
+  );
+  const [date, setDate] = useState(
+    initialDate === '전체 날짜' ? '' : initialDate.replaceAll('.', '-')
+  );
   const [countries, setCountries] = useState<string[]>(
     initialCountries === '전체 국가' ? [] : countriesArray
   );

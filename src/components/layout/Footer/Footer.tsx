@@ -1,18 +1,15 @@
 import Image from 'next/image';
 import { Container, PageNavigatorButton } from './Footer.style';
+import { useArticleType } from '@/hooks/useArticleType';
 
-interface Props {
-  articleType: 'default' | 'scrap';
-  setArticleType: (articleType: 'default' | 'scrap') => void;
-}
-
-export default function Footer({ articleType, setArticleType }: Props) {
+export default function Footer() {
+  const { articleType, setArticleTypeStore } = useArticleType();
   const isHomePage = articleType === 'default';
 
   return (
     <Container>
       <PageNavigatorButton
-        onClick={() => setArticleType('default')}
+        onClick={() => setArticleTypeStore('default')}
         color={isHomePage ? '#fff' : '#6D6D6D'}
       >
         <Image
@@ -24,7 +21,7 @@ export default function Footer({ articleType, setArticleType }: Props) {
         홈
       </PageNavigatorButton>
       <PageNavigatorButton
-        onClick={() => setArticleType('scrap')}
+        onClick={() => setArticleTypeStore('scrap')}
         color={isHomePage ? '#6D6D6D' : '#fff'}
       >
         <Image

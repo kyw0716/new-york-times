@@ -1,13 +1,12 @@
 import ArticleList from '@/components/article/List';
 import { Article } from '@/components/article/List/ArticleList';
-import Footer from '@/components/layout/Footer';
+import { useArticleType } from '@/hooks/useArticleType';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useState } from 'react';
 import styled from 'styled-components';
 
 function ArticleFetcher() {
-  const [articleType, setArticleType] = useState<'default' | 'scrap'>('default');
+  const { articleType } = useArticleType();
 
   const { data, isPending, isError } = useQuery<Article[]>({
     queryKey: ['search-articles'],
@@ -45,12 +44,9 @@ function ArticleFetcher() {
   }
 
   return (
-    <>
-      <Container>
-        <ArticleList articles={articleType === 'default' ? data : []} />
-      </Container>
-      <Footer articleType={articleType} setArticleType={setArticleType} />
-    </>
+    <Container>
+      <ArticleList articles={articleType === 'default' ? data : []} />
+    </Container>
   );
 }
 

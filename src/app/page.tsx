@@ -6,6 +6,7 @@ import GlobalStyles from '../styles/GlobalStyles';
 import Header from '@/components/layout/Header';
 import styled from 'styled-components';
 import Modal from '@/components/modal';
+import Footer from '@/components/layout/Footer';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ export default function Main() {
       <Container>
         <ArticleFetcher />
       </Container>
+      <Footer />
       <Modal />
     </QueryClientProvider>
   );
