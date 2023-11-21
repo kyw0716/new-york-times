@@ -11,22 +11,34 @@ import {
 } from './ArticleCard.style';
 import { useRouter } from 'next/navigation';
 import { useDate } from '@/hooks/useDate';
+import { MouseEventHandler } from 'react';
+import { setScrappedArticles } from '@/stores/article/scrappedArticleStore';
 
 interface Props {
   article: Article;
-  isSubscribed?: boolean;
+  isScrapped?: boolean;
 }
 
-function ArticleCard({ article, isSubscribed }: Props) {
+function ArticleCard({ article, isScrapped: isSubscribed }: Props) {
   const router = useRouter();
   const { headline, organization, reporter, web_url, pub_date } = article;
   const { year, month, day } = useDate(pub_date);
+
+  const handleClickScrapButton: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+
+    if (!isSubscribed) {
+      setScrappedArticles(article, 'add');
+    } else {
+      setScrappedArticles(article, 'delete');
+    }
+  };
 
   return (
     <Container onClick={() => router.push(web_url)}>
       <Head>
         <HeadLine>{headline}</HeadLine>
-        <UnStyledButton>
+        <UnStyledButton onClick={handleClickScrapButton}>
           <Image
             alt={isSubscribed ? '노란색이 채워진 별 아이콘' : '빈 별 아이콘'}
             src={isSubscribed ? '/star-fill.svg' : '/star-empty.svg'}

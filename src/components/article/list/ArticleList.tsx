@@ -1,5 +1,6 @@
 import ArticleCard from '../Card';
 import { Container } from './ArticleList.style';
+import { getScrappedArticles } from '@/stores/article/scrappedArticleStore';
 
 export interface Article {
   id: string;
@@ -18,7 +19,11 @@ function ArticleList({ articles }: Props) {
   return (
     <Container>
       {articles.map((article) => (
-        <ArticleCard key={article.id} article={article} />
+        <ArticleCard
+          key={article.id}
+          article={article}
+          isScrapped={getScrappedArticles()[article.id] !== undefined}
+        />
       ))}
     </Container>
   );
