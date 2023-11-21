@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { Article } from '../../List/ArticleList';
 import axios from 'axios';
 import { getHomeFilterStore } from '@/stores/filter/homeFilterStore';
@@ -12,23 +12,23 @@ interface ArticleKeyword {
 }
 
 export const useArticleQuery = () => {
-  return useQuery<Article[]>({
+  return useInfiniteQuery<Article[]>({
     queryKey: [QUERY_KEY_ARTICLE_SEARCH],
-    queryFn: async () => {
+    queryFn: async ({ pageParam }) => {
       const headline = getHomeFilterStore().headline;
       const date = getHomeFilterStore().date.replace(/-/g, '');
       const countries = getHomeFilterStore()
         .countries.map((country) => `"${COUNTRIES[country]}"`)
         .join(',');
 
-      const requestUrl = getRequestUrl(headline, date, countries);
-      const response = await axios.get(requestUrl);
+      const requestUrl = getRequestUrl(headline, date, countries, pageParam as number);
 
-      return response.data.response.docs;
-    },
-    select: (data) => {
-      // TODO: 데이터 타입 정의 해보기
-      return data.map((d: any) => {
+      console.log(requestUrl);
+
+      const response = await axios.get(requestUrl);
+      const docs = response.data.response.docs;
+
+      return docs.map((d: any) => {
         const person = d.byline.person[0];
         const name = person ? `${person.firstname} ${person.lastname}` : '';
         const countries = d.keywords
@@ -45,6 +45,16 @@ export const useArticleQuery = () => {
           countries,
         };
       });
+    },
+    initialPageParam: 1,
+    getNextPageParam: (_, allPages) => {
+      const pagesLength = allPages.length;
+
+      if (pagesLength >= 100) {
+        return null;
+      }
+
+      return pagesLength + 1;
     },
   });
 };

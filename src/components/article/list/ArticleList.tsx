@@ -1,6 +1,8 @@
+import { forwardRef } from 'react';
 import ArticleCard from '../Card';
 import { Container } from './ArticleList.style';
 import { getScrappedArticles } from '@/stores/article/scrappedArticleStore';
+import { LoadingContainer, LoadingSpinner } from '../Fetcher/ArticleFetcher.style';
 
 export interface Article {
   id: string;
@@ -14,9 +16,10 @@ export interface Article {
 
 interface Props {
   articles: Article[];
+  isFetching?: boolean;
 }
 
-function ArticleList({ articles }: Props) {
+const ArticleList = forwardRef<HTMLDivElement, Props>(({ articles, isFetching }, ref) => {
   return (
     <Container>
       {articles.map((article) => (
@@ -26,8 +29,17 @@ function ArticleList({ articles }: Props) {
           isScrapped={getScrappedArticles()[article.id] !== undefined}
         />
       ))}
+      {isFetching ? (
+        <LoadingContainer>
+          <LoadingSpinner />
+        </LoadingContainer>
+      ) : (
+        <div ref={ref}></div>
+      )}
     </Container>
   );
-}
+});
+
+ArticleList.displayName = 'ArticleList';
 
 export default ArticleList;
