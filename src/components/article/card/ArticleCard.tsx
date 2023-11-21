@@ -28,9 +28,9 @@ function ArticleCard({ article, isSubscribed }: Props) {
         <HeadLine>{headline}</HeadLine>
         <UnStyledButton>
           {isSubscribed ? (
-            <Image alt="노란색이 채워진 별 아이콘" src={'/star-fill.svg'} width={15} height={15} />
+            <Image alt="노란색이 채워진 별 아이콘" src={'/star-fill.svg'} width={18} height={18} />
           ) : (
-            <Image alt="빈 별 아이콘" src={'/star-empty.svg'} width={15} height={15} />
+            <Image alt="빈 별 아이콘" src={'/star-empty.svg'} width={18} height={18} />
           )}
         </UnStyledButton>
       </Head>
