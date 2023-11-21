@@ -9,6 +9,7 @@ export interface Article {
   reporter: string;
   web_url: string;
   pub_date: string;
+  countries: string[];
 }
 
 interface Props {

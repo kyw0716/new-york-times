@@ -7,7 +7,7 @@ import { useScrappedArticle } from '@/hooks/useScrappedArticle';
 function ArticleFetcher() {
   const { articleType } = useArticleType();
   const { data, isPending, isError } = useArticleQuery();
-  const { scrappedArticle } = useScrappedArticle();
+  const { scrappedArticleList } = useScrappedArticle();
 
   if (isPending) {
     return <>로딩중...</>;
@@ -19,7 +19,7 @@ function ArticleFetcher() {
 
   return (
     <Container>
-      <ArticleList articles={articleType === 'default' ? data : Object.values(scrappedArticle)} />
+      <ArticleList articles={articleType === 'default' ? data : scrappedArticleList} />
     </Container>
   );
 }
