@@ -1,10 +1,10 @@
 export const COUNTRIES = {
-  대한민국: 'SOUTH KOREA',
-  중국: 'CHINA',
-  일본: 'JAPAN',
-  미국: 'USA',
-  북한: 'NORTH KOREA',
-  러시아: 'RUSSIA',
-  프랑스: 'FRANCE',
-  영국: 'ENGLAND',
+  대한민국: 'South Korea',
+  중국: 'China',
+  일본: 'Japan',
+  미국: 'Usa',
+  북한: 'North Korea',
+  러시아: 'Russia',
+  프랑스: 'France',
+  영국: 'England',
 };

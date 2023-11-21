@@ -6,12 +6,14 @@ import {
 } from '@/stores/article/scrappedArticleStore';
 import { useSyncExternalStore } from 'react';
 import { useScrapFilter } from './useScrapFilter';
+import { COUNTRIES } from '@/components/modal/filter/contstans';
 
 const filterScrappedArticles = (headline: string, date: string, countries: string[]) => {
   const scrappedArticles = getScrappedArticles();
 
   const filteredArticles = (Object.values(scrappedArticles) as Article[]).filter((article) => {
-    const isHeadline = headline !== '' ? article.headline.includes(headline) : true;
+    const isHeadline =
+      headline !== '' ? article.headline.toLowerCase().includes(headline.toLowerCase()) : true;
     const isDate = date !== '' ? article.pub_date.includes(date) : true;
     const isCountries =
       countries.length !== 0
@@ -27,7 +29,11 @@ const filterScrappedArticles = (headline: string, date: string, countries: strin
 export const useScrappedArticle = () => {
   const scrappedArticle = useSyncExternalStore(subscribeScrappedArticles, getScrappedArticles);
   const { headline, date, countries } = useScrapFilter();
-  const scrappedArticleList = filterScrappedArticles(headline, date, countries);
+  const scrappedArticleList = filterScrappedArticles(
+    headline,
+    date,
+    countries.map((c) => COUNTRIES[c])
+  );
 
   const scrapArticle = (article: Article) => {
     setScrappedArticles(article, 'add');
